@@ -6,14 +6,16 @@ import java.util.Scanner;
  *
  * @author fien_
  */
-public class Mastermind {
+public class MastermindMain {
 
     public static void main(String[] args) {
 
         char c;
         String letter;
-        Scanner scan = new Scanner(System.in);
+        int aantalPlaatsJuist = 0;
+        int aantalLettersJuist = 0;
         String invoer;
+        Scanner scan = new Scanner(System.in);
         char eersteLetter;
         char tweedeLetter;
         char derdeLetter;
@@ -22,11 +24,11 @@ public class Mastermind {
         String letter2;
         String letter3;
         String letter4;
-        int aantalPlaatsJuist = 0;
-        int aantalLettersJuist = 0;
+        int dubbeleLetters = 0;
 
         //letters genereren
         ArrayList<String> code = new ArrayList<>();
+        ArrayList<String> dubbel = new ArrayList<>();
 
         while (code.size() < 4) {
             Random rnd = new Random();
@@ -61,84 +63,70 @@ public class Mastermind {
 
             System.out.println(invoer);
 
-            //invoer omzetten naar losse strings, zodat ze in antwoord kunnen worden opgeslagen. 
             eersteLetter = invoer.charAt(0);
             letter1 = String.valueOf(eersteLetter);
             antwoord.add(letter1);
-
-            System.out.println(antwoord.get(0));
-
-            //vergelijken strings. Methode maken, code is nog veel herhalen. 
-            if (code.contains(antwoord.get(0))) {
-                aantalLettersJuist = aantalLettersJuist + 1;
-
-            }
-
-            if (code.get(0).equals(antwoord.get(0))) {
-                aantalPlaatsJuist = aantalPlaatsJuist + 1;
-
-            }
 
             tweedeLetter = invoer.charAt(1);
             letter2 = String.valueOf(tweedeLetter);
             antwoord.add(letter2);
 
-            System.out.println(antwoord.get(1));
-
-            if (code.contains(antwoord.get(1))) {
-                aantalLettersJuist = aantalLettersJuist + 1;
-            }
-
-            if (code.get(1).equals(antwoord.get(1))) {
-                aantalPlaatsJuist = aantalPlaatsJuist + 1;
-            }
-
             derdeLetter = invoer.charAt(2);
             letter3 = String.valueOf(derdeLetter);
             antwoord.add(letter3);
 
-            System.out.println(antwoord.get(2));
-
-            if (code.contains(antwoord.get(2))) {
-                aantalLettersJuist = aantalLettersJuist + 1;
-            }
-
-            if (code.get(2).equals(antwoord.get(2))) {
-                aantalPlaatsJuist = aantalPlaatsJuist + 1;
-            }
-
             vierdeLetter = invoer.charAt(3);
             letter4 = String.valueOf(vierdeLetter);
             antwoord.add(letter4);
-
-            System.out.println(antwoord.get(3));
-
-            if (code.contains(antwoord.get(3))) {
-                aantalLettersJuist = aantalLettersJuist + 1;
+            
+            //tellen letters die op de juiste plaats staan
+            for (int i = 0; i < code.size(); i++) {
+                if (antwoord.get(i).equals(code.get(i))) {
+                    aantalPlaatsJuist += 1;
+                    
+                }
             }
-
-            if (code.get(3).equals(antwoord.get(3))) {
-                aantalPlaatsJuist = aantalPlaatsJuist + 1;
-
+            
+            //arraylist aanmaken zonder de dubbele waardes
+            for (String element : antwoord) {
+                if (!dubbel.contains(element)) {
+                    dubbel.add(element);
+                }
             }
+            
+            //arraylist zonder dubbele waardes vergelijken met de code
+            for (int a = 0; a < dubbel.size(); a++) {
+                for (int b = 0; b < code.size(); b++) {
+                    if (dubbel.get(a).equals(code.get(b))) {
+                        aantalLettersJuist += 1;
+                    }
+                }
+
+                
+            }
+            
+            //dubbele telling corrigeren
+            aantalLettersJuist = aantalLettersJuist - aantalPlaatsJuist;
+
             if (aantalPlaatsJuist >= 4) {
                 System.out.println("Gefelicteerd, je hebt gewonnen!");
                 break;
             }
-            if (aantalLettersJuist == 1){
-                System.out.println("Van de opgegeven letters zit er " + aantalLettersJuist + " in de code.");
-            } else { 
-                System.out.println("Van de opgegeven letters zitten er " + aantalLettersJuist + " in de code.");
+            
+            if (aantalPlaatsJuist == 1) {
+                System.out.println("Van de opgegeven letters staat er " + aantalPlaatsJuist + " op de juiste plaats.");
+            } else {
+                System.out.println("Van de opgegeven letters staan er " + aantalPlaatsJuist + " op de juiste plaats.");
             }
             
-            if (aantalPlaatsJuist == 1){
-                System.out.println("Van de opgegeven letters staat er " + aantalPlaatsJuist + " op de juiste plaats.");
-            }else {
-            System.out.println("Van de opgegeven letters staan er " + aantalPlaatsJuist + " op de juiste plaats.");}
+            if (aantalLettersJuist == 1) {
+                System.out.println("Van de overige letters zit er " + aantalLettersJuist + " in de code, maar niet op de juiste plaats.");
+            } else {
+                System.out.println("Van de overige letters zitten er " + aantalLettersJuist + " in de code, maar niet op de juiste plaats.");
+            }
             antwoord.clear();
+            dubbel.clear();
 
         }
-
     }
-
 }

@@ -57,8 +57,8 @@ public class MastermindSpel {
     //spel zelf
     public void Spel() {
 
-        //code genereren     
-        System.out.println("computer genereert code" + this.maakCode());
+       //code genereren     
+        this.maakCode();
 
         // loop blijft vragen om invoer tot spel is afgelopen
         while (aantalPlaatsJuist <= 4) {
@@ -216,7 +216,8 @@ public class MastermindSpel {
 
             }
         }
-
+ 	
+	//per letter tellen in antwoord
         for (int g = 0; g < antwoord.size(); g++) {
 
             for (int h = 0; h < basis.size(); h++) {
@@ -304,8 +305,6 @@ public class MastermindSpel {
         if (fa < fc) {
             this.aantalLettersJuist = this.aantalLettersJuist + fa;
         }
-
-        System.out.println("totaal aantal letters die voorkomen in code en antwoord: " + this.aantalLettersJuist);
 
         aantalLettersJuist = aantalLettersJuist - aantalPlaatsJuist;
 

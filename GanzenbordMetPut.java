@@ -82,14 +82,16 @@ public class Spel {
 
                     }
                     //tweede in de put, eerste speler is vrij
-                    if (inPut.size() > 1 && speler.getBeurtInPut() == 0) {
-                        inPut.get(0).valtInDePut(false);
-                        inPut.set(0, inPut.get(1));
-                        inPut.remove(1);
-                        System.out.println("Je bent in de put gevallen!  Wacht tot er iemand langskomt om je te bevrijden");
+		 if (inPut.size() > 1 && speler.getBeurtInPut() == 0) {
+                 	System.out.println("Je bent in de put gevallen!  Wacht tot er iemand langskomt om je te bevrijden");
+                	System.out.println(inPut.get(0).getNaam() + " is weer vrij");
+                	inPut.get(0).valtInDePut(false);
+                	inPut.remove(0);
+                        
                         speler.setBeurtInPut(1);
 
                     }
+                
                     //speler zit in de put, moet wachten
                     if (inPut.size() > 1 && speler.getBeurtInPut() > 0){
                         speler.setBeurtInPut(1);
@@ -153,10 +155,9 @@ public class Speler {
 
     //dobbelsteen
     public int dobbelsteen() {
-        //Random randomGenerator = new Random();        
-        //worp = randomGenerator.nextInt(6) + 1; 
-        
-        worp = 4;
+        Random randomGenerator = new Random();        
+        worp = randomGenerator.nextInt(6) + 1; 
+             
 
         System.out.println("Je hebt " + worp + " gegooid.");
 

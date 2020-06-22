@@ -79,24 +79,28 @@ public class Spel {
                     //eerste in de put
                     if (inPut.size() < 2) {
                         System.out.println("Je bent in de put gevallen! Wacht tot er iemand langskomt om je te bevrijden");
+                        speler.setBeurtInPut(1);
 
                     }
+
                     //tweede in de put, eerste speler is vrij
-		 if (inPut.size() > 1 && speler.getBeurtInPut() == 0) {
-                 	System.out.println("Je bent in de put gevallen!  Wacht tot er iemand langskomt om je te bevrijden");
-                	System.out.println(inPut.get(0).getNaam() + " is weer vrij");
-                	inPut.get(0).valtInDePut(false);
-                	inPut.remove(0);
-                        
-                        speler.setBeurtInPut(1);
+                    if (inPut.size() >= 2 && speler.getBeurtInPut() == 0) {
+                        System.out.println("Je bent in de put gevallen!  Wacht tot er iemand langskomt om je te bevrijden");
+                        System.out.println(inPut.get(0).getNaam() + " is weer vrij");
+                        inPut.get(0).valtInDePut(false);
+                        inPut.remove(0);
 
-                    }
-                
-                    //speler zit in de put, moet wachten
-                    if (inPut.size() > 1 && speler.getBeurtInPut() > 0){
                         speler.setBeurtInPut(1);
-                        System.out.println(inPut.get(0).getNaam() + " moet nog wachten tot er iemand langskomt.");
+                        System.out.println("Aantal beurten in put" + speler.getBeurtInPut());
                     }
+
+                    //speler zit in de put, moet wachten
+                    /*if (inPut.size() < 2 && speler.getBeurtInPut() > 1) {
+                        speler.setBeurtInPut(1);
+                        System.out.println("Aantal beurten in put" + speler.getBeurtInPut());
+                        System.out.println(inPut.get(0).getNaam() + " moet nog wachten tot er iemand langskomt.");*/
+                }
+
 
                 }
 

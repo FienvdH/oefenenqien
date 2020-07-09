@@ -22,7 +22,6 @@ public class YahtzeeMain {
         YahtzeeSpel spel1 = new YahtzeeSpel();
         spel1.spelen();
 
-
     }
 
 }
@@ -56,12 +55,12 @@ class YahtzeeSpel {
         spelers.add(new Speler("Theo"));
         spelers.add(new Speler("Thea"));
 
-        while (true) {
+        
 
             Iterator<Speler> it = spelers.iterator();
             while (it.hasNext()) {
                 Speler speler = (Speler) it.next();
-                 
+
                 System.out.println(speler.getNaam() + " is aan de beurt.");
                 System.out.println("Gooi met Enter (eerste beurt)");
                 invoer = scan.nextLine();
@@ -93,7 +92,7 @@ class YahtzeeSpel {
 
             }
 
-        }
+        
     }
 //gooit de dobbelsteen
 
@@ -118,9 +117,9 @@ class YahtzeeSpel {
     //zorgt ervoor dat de niet-vastgezette dobbelstenen nogmaals gegooid worden
     void tweedeWorp() {
         //zet de resultaat Array weer terug naar 0;
-        for (int i = 0; i < worpResultaat.uitslagArray.length; i++) {
-            worpResultaat.uitslagArray[i] = 0;
-        }
+        //for (int i = 0; i < worpResultaat.uitslagArray.length; i++) {
+        //    worpResultaat.uitslagArray[i] = 0;
+        //}
 
         System.out.println("Gooi met Enter (tweede beurt)");
         invoer = scan.nextLine();
@@ -146,6 +145,8 @@ class YahtzeeSpel {
     }
 
     //bepaald welke dobbelstenen worden vastgehouden
+    
+    //kan dit efficineter?
     int[] vasthouden() {
         System.out.println("");
         System.out.println("Welke dobbelstenen wil je vasthouden? Kies 1 tot en met 5.");
@@ -154,15 +155,16 @@ class YahtzeeSpel {
         System.out.println("Je wil de dobbelstenen op de volgende posities vasthouden: " + invoer);
         tussenArray = invoer.toCharArray();
 
+        
         //haalt de nummers uit de char array en vertaalt dit naar de juiste indexpositie in de vast[]
         for (int i = 0; i < tussenArray.length; i++) {
             vast[Character.getNumericValue(tussenArray[i]) - 1] = 1;
         }
 
         //veranderd de 0 naar 1 wanneer de dobbelsteen moet worden vastgezet, blokkeerarray
-        for (int i = 0; i < vast.length; i++) {
+        //for (int i = 0; i < vast.length; i++) {
 
-        }
+        //}
         return vast;
     }
 
@@ -176,9 +178,8 @@ class YahtzeeSpel {
 
     }
 
-    void geschiedenisSchrijven(Speler speler
-    ) {
-        worpResultaat.uitslagArray = worpResultaat.getResultaat();
+    void geschiedenisSchrijven(Speler speler) {
+        worpResultaat.uitslagArray = worpResultaat.getResultaat(); // waarom dit?
         speler.worpgeschiedenis.add(worpResultaat);
         System.out.println(">>" + speler.worpgeschiedenis.size());
 
